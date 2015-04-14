@@ -3,10 +3,10 @@
 
 from app import app
 from flask import request, jsonify
-from flask.ext.cors import CORS, cross_origin
+#from flask.ext.cors import CORS, cross_origin
 
 @app.route('/ask', methods=['POST', 'GET'])
-@cross_origin()
+#@cross_origin()
 def ask():	
 	answer = []
 	for mess in request.form.getlist('messages'):
