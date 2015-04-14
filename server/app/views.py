@@ -4,10 +4,11 @@
 from app import app
 from flask import request, jsonify
 
-@app.route('/ask')
-def ask():
-	answer = [{'rate':(len(mess) % 2), 'text':mess} for mess in request.args.getlist('messages')]
-	print answer
+@app.route('/ask', methods=['POST', 'GET'])
+def ask():	
+	answer = []
+	for mess in request.form.getlist('messages'):
+		answer.append({'rate':len(mess), 'text':mess})
 	return jsonify(estimates=answer)
 	
 @app.route('/index')
