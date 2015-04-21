@@ -9,13 +9,12 @@ from nltk import NaiveBayesClassifier, word_tokenize
 import pickle
 
 
-f = open('my_classifier.pickle')
-classifier = pickle.load(f)
-f.close()
+with open('my_classifier.pickle') as f
+	classifier = pickle.load(f)
 
 all_words = set()
 train_set = []
-classifier 
+classifier
 
 @app.route('/ask', methods=['POST'])
 @cross_origin()
@@ -24,7 +23,7 @@ def ask():
 	body = json.loads(request.data)
 	for mess in body['messages']:
 		test = {word.lower(): (word in word_tokenize(mess.lower())) for word in all_words}
-		answer.append({'rate':classifier.classify(test), 'text':mess})
+		answer.append({'rate':int(classifier.classify(test)), 'text':mess})
 	return jsonify(estimates=answer)
 	
 @app.route('/ans', methods=['POST'])
@@ -36,9 +35,8 @@ def ans():
 		t = [({word: (word in word_tokenize(x[0])) for word in all_words}, x[1]) for x in train_set]
 		print t
 		classifier = nltk.NaiveBayesClassifier.train(t)
-		f = open('my_classifier.pickle', 'wb')
-		pickle.dump(classifier, f)
-		f.close()
+		with open('my_classifier.pickle', 'wb') as f:
+			pickle.dump(classifier, f)
 		return "Thanks"
 	for mess in body:
 		train_set.append((mess['message'], mess['isGood']))
