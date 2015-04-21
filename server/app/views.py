@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 
 from app import app
@@ -8,13 +7,11 @@ from flask.ext.cors import CORS, cross_origin
 from nltk import NaiveBayesClassifier, word_tokenize
 import pickle
 
-
-with open('my_classifier.pickle') as f
+with open('my_classifier.pickle') as f:
 	classifier = pickle.load(f)
 
 all_words = set()
 train_set = []
-classifier
 
 @app.route('/ask', methods=['POST'])
 @cross_origin()
@@ -23,7 +20,7 @@ def ask():
 	body = json.loads(request.data)
 	for mess in body['messages']:
 		test = {word.lower(): (word in word_tokenize(mess.lower())) for word in all_words}
-		answer.append({'rate':int(classifier.classify(test)), 'text':mess})
+		answer.append({'rate':len(mess), 'text':mess})
 	return jsonify(estimates=answer)
 	
 @app.route('/ans', methods=['POST'])
