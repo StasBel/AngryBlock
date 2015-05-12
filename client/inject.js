@@ -47,7 +47,7 @@ function badButton(id){
 }
 
 function isGood(estimate){
-	if (estimate >= 0){
+	if (estimate >= 50){
 		return true;
 	}else {
 		return false;
@@ -57,8 +57,8 @@ function isGood(estimate){
 function addButtons(id){
 	var element = elementsList[id].getElementsByClassName("colm_preview_post")[0]
 	var buttons = ""
-	buttons += "<table style='width: 100%; border-spacing: 0;'><tr><td><div align='left'><button style='background-color: green; color: white;' id='goodButton-" + id + "'>GOOD</button></div></td>"
-	buttons += "<td><div align='right'><button style='background-color: red; color: white;' id='badButton-" + id + "'>BAD</button></div></td></tr></table>"
+	buttons += "<table style='width: 100%; border-spacing: 0;'><tr><td><div align='left'><button style='background-color: green; color: white; border-radius: 5px;' id='goodButton-" + id + "'>GOOD</button></div></td>"
+	buttons += "<td><div align='right'><button style='background-color: red; color: white; border-radius: 5px;' id='badButton-" + id + "'>BAD</button></div></td></tr></table>"
 	element.innerHTML = element.innerHTML + buttons
 	document.getElementById("goodButton-" + id).addEventListener("click", function(id) { return function() {goodButton(id)}}(id), false)
 	document.getElementById("badButton-" + id).addEventListener("click", function(id) { return function() {badButton(id)}}(id), false)
