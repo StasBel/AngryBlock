@@ -10,9 +10,8 @@ function updateClassificator(title, estimate){
 	xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8')
 
 	xhr.onreadystatechange = function() {
-		console.log("readyState: " + xhr.readyState + ", status: " + xhr.status)
 		if (xhr.readyState == 4 && xhr.status == 200){
-			console.log("OK")
+			//...
 		}
 	}
 
