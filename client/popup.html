@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <title>TestExtension1Popup</title>
+    <style>
+      div {
+        width: 175px;
+      }
+      #blocked_result {
+        font-size: xx-large;
+      }
+      #positive_result {
+        font-size: xx-large;
+        color: green;
+      }
+      #negative_result {
+        font-size: xx-large;
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="isdel_text" align="middle">
+      BLOCK NEGATIVE NEWS?
+    </div>
+    <div id="isdel_field" align="middle">
+       <input id="isdel_checkbox" type="checkbox" tabindex=-1 align="middle"></input>
+    </div>
+    <div id="transparency_text" align="middle">
+      TRANSPARENCY LEVEL:
+    </div>
+    <div id="transparency_field" align="middle">
+      <input id="transparency_range" type="range" min="0" max="1" step="0.01" tabindex=-1> 
+    </div>
+    <div id="blocked_text" align="middle">BLOCKED NEWS:</div>
+    <div id="blocked_result" align="middle"></div>
+    <div id="positive_text" align="middle">POSITIVE NEWS:</div>
+    <div id="positive_result" align="middle"></div>
+    <div id="negative_text" align="middle">NEGATIVE NEWS:</div>
+    <div id="negative_result" align="middle"></div>
+    <script type="text/javascript" src="request_popup.js"></script>
+  </body>
+</html>
+
