@@ -18,6 +18,20 @@
         font-size: xx-large;
         color: red;
       }
+      #reload_button {
+        background-color: white;
+        outline: none;
+        border-radius: 7px;
+      }
+      #reload_image {
+        outline: none;
+        vertical-align: middle;
+      }
+      #reload_text {
+        font-variant: Arial;
+        font-weight: normal;
+        vertical-align: middle; 
+      }
     </style>
   </head>
   <body>
@@ -27,12 +41,25 @@
     <div id="isdel_field" align="middle">
        <input id="isdel_checkbox" type="checkbox" tabindex=-1 align="middle"></input>
     </div>
+    <div id="isbutton_text" align="middle">
+      SHOW GOOD/BAD BUTTONS?
+    </div>
+    <div id="isbutton_field" align="middle">
+       <input id="isbutton_checkbox" type="checkbox" tabindex=-1 align="middle"></input>
+    </div>
     <div id="transparency_text" align="middle">
       TRANSPARENCY LEVEL:
     </div>
     <div id="transparency_field" align="middle">
       <input id="transparency_range" type="range" min="0" max="1" step="0.01" tabindex=-1> 
     </div>
+    <!---<div align="middle">
+      <button id="reload_button">
+        <img id="reload_image" src="reload.png" tabindex=-1>
+        <font id="reload_text" size="4">RELOAD</font>
+      </button>
+    </div>-->
+    <hr>
     <div id="blocked_text" align="middle">BLOCKED NEWS:</div>
     <div id="blocked_result" align="middle"></div>
     <div id="positive_text" align="middle">POSITIVE NEWS:</div>

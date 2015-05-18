@@ -91,8 +91,11 @@ function changeBackgroundColor(id, color, transparencyLevel){
 	}
 }
 
-function addNews(id, type, transparencyLevel){
-	addButtons(id)
+function addNews(id, type, transparencyLevel, isNeedToAddButtons){
+	if (isNeedToAddButtons){
+		addButtons(id)
+	}
+	//addButtons(id)
 	updateHTMLStructure(id)
 	if (type == "good"){
 		changeBackgroundColor(id, "green", transparencyLevel)
@@ -118,21 +121,27 @@ function addingButtonsAndBlock(){
 				obj2.transparencyLevel = 0.25
 				chrome.storage.local.set({"transparencyLevel": 0.25})
 			}
-			for (var id = 0; id < elementsList.length; id++) {
-				if (isGood(estimatesList[id])){
-					goodEmount++
-					addNews(id, "good", obj2.transparencyLevel);
-				}else {
-					if (obj1.isNeedToBlockNews){
-						blockEmount++
-						elementsList[id].remove()
+			chrome.storage.local.get("isNeedToAddButtons", function(obj3){
+				if (typeof(obj3.isNeedToAddButtons) == "undefined"){
+					obj3.isNeedToAddButtons = false
+					chrome.storage.local.set({"isNeedToAddButtons": false})
+				}
+				for (var id = 0; id < elementsList.length; id++) {
+					if (isGood(estimatesList[id])){
+						goodEmount++
+						addNews(id, "good", obj2.transparencyLevel, obj3.isNeedToAddButtons);
 					}else {
-						badEmount++;
-						addNews(id, "bad", obj2.transparencyLevel);
+						if (obj1.isNeedToBlockNews){
+							blockEmount++
+							elementsList[id].remove()
+						}else {
+							badEmount++;
+							addNews(id, "bad", obj2.transparencyLevel, obj3.isNeedToAddButtons);
+						}
 					}
 				}
-			}
-			showPage()
+				showPage()
+			})
 		})
 	})
 }
@@ -150,4 +159,9 @@ chrome.runtime.onMessage.addListener(
   				negative: badEmount
   			})
   		}
- });
+ })
+
+
+
+
+
