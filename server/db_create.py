@@ -5,8 +5,6 @@ from app import db, models
 import os.path
 from app.models import Word
 
-if SQLALCHEMY_DATABASE_URI is None:
-	throw("Ya lublu gusey")
 db.create_all()
 
 

@@ -75,6 +75,7 @@ def ans():
 					w.cnt = w.cnt + 1
 					db.session.commit()
 		db.session.commit()
+	db.session.commit()
 	return "Thanks!"
 	
 @app.route('/')
