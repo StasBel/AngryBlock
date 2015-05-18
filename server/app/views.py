@@ -10,6 +10,8 @@ from models import Word
 import math
 from math import log
 
+nltk.data.path.append('./nltk_data/')
+
 @app.route('/ask', methods=['POST'])
 @cross_origin()
 def ask():	
