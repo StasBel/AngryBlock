@@ -41,7 +41,6 @@ def ans():
 	info = Word.query.get('word_information') 
 	doc = Word.query.get('doc_information')		
 	for new in body:
-		print word_tokenize(new['message'].lower())
 		if (int(bool(new['isGood'])) == 1):
 			doc.pos = doc.pos + 1
 		else:
