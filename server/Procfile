@@ -1,2 +1,2 @@
-web: gunicorn run:app
-init: python db_create.py
+web: gunicorn run:app -b 0.0.0.0:\$PORT -w 3
+init: venv/bin/python db_create.py
