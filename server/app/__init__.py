@@ -2,7 +2,7 @@ import os
 from flask import Flask, request
 from flask.ext.cors import CORS, cross_origin
 from flask.ext.sqlalchemy import SQLAlchemy
-import logging
+import logging, sys
 
 app = Flask(__name__)
 
