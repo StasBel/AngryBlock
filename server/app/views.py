@@ -5,12 +5,15 @@ from app import app, db, models
 from flask import request, jsonify
 import json, nltk
 from flask.ext.cors import CORS, cross_origin
-from nltk import word_tokenize
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
 from models import Word
 import math
 from math import log
 
 nltk.data.path.append('./nltk_data/')
+
+stopset = set(stopwords.words('russian'))
 
 @app.route('/ask', methods=['POST'])
 @cross_origin()
@@ -48,7 +51,7 @@ def ans():
 		doc.cnt = doc.cnt + 1
 		db.session.commit()
 		if (int(bool(new['isGood'])) == 1):
-			for word in word_tokenize(new['message'].lower()):
+			for word in word_tokenize(new['message'].lower()) if not word in stopset:
 				w = Word.query.get(word)
 				if w is None:
 					w = Word(id = word, pos = 1, cnt = 1)
@@ -62,7 +65,7 @@ def ans():
 					w.cnt = w.cnt + 1
 					db.session.commit()
 		else:
-			for word in word_tokenize(new['message'].lower()):
+			for word in word_tokenize(new['message'].lower()) if not word in stopset:
 				w = Word.query.get(word)
 				if w is None:
 					w = Word(id = word, neg = 1, cnt = 1)
