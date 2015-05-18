@@ -7,7 +7,6 @@ import json, nltk
 from flask.ext.cors import CORS, cross_origin
 from nltk import word_tokenize
 from models import Word
-from sqlalchemy import update
 import math
 from math import log
 
