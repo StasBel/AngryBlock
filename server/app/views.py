@@ -50,7 +50,7 @@ def ans():
 		doc.cnt = doc.cnt + 1
 		db.session.commit()
 		if (int(bool(new['isGood'])) == 1):
-			for word in tokenizer.tokenize(mess.lower()):
+			for word in tokenizer.tokenize(new['message'].lower()):
 				w = Word.query.get(word)
 				if w is None:
 					w = Word(id = word, pos = 1, cnt = 1)
