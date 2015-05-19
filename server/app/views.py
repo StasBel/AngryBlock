@@ -64,7 +64,7 @@ def ans():
 					w.cnt = w.cnt + 1
 					db.session.commit()
 		else:
-			for word in tokenizer.tokenize(mess.lower()):
+			for word in tokenizer.tokenize(new['message'].lower()):
 				w = Word.query.get(word)
 				if w is None:
 					w = Word(id = word, neg = 1, cnt = 1)
