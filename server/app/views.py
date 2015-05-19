@@ -5,15 +5,14 @@ from app import app, db, models
 from flask import request, jsonify
 import json, nltk
 from flask.ext.cors import CORS, cross_origin
-from nltk.tokenize import word_tokenize
-from nltk.corpus import stopwords
+from nltk.tokenize import RegexpTokenizer
 from models import Word
 import math
 from math import log
 
 nltk.data.path.append('./nltk_data/')
 
-stopset = set(stopwords.words('russian'))
+tokenizer = RegexpTokenizer(r'\w+')
 
 @app.route('/ask', methods=['POST'])
 @cross_origin()
@@ -26,7 +25,7 @@ def ask():
 	for mess in body['messages']:
 		pos_p = log(doc.pos / float(doc.cnt))
 		neg_p = log(doc.neg / float(doc.cnt))
-		for word in word_tokenize(mess.lower()):
+		for word in tokenizer.tokenize(mess.lower()):
 			w = Word.query.get(word)
 			if not (w is None):
 				pos_p += log((w.pos + 1) / float(info.pos + info.cnt))
@@ -51,7 +50,7 @@ def ans():
 		doc.cnt = doc.cnt + 1
 		db.session.commit()
 		if (int(bool(new['isGood'])) == 1):
-			for word in word_tokenize(new['message'].lower()) if not word in stopset:
+			for word in tokenizer.tokenize(mess.lower()):
 				w = Word.query.get(word)
 				if w is None:
 					w = Word(id = word, pos = 1, cnt = 1)
@@ -65,7 +64,7 @@ def ans():
 					w.cnt = w.cnt + 1
 					db.session.commit()
 		else:
-			for word in word_tokenize(new['message'].lower()) if not word in stopset:
+			for word in tokenizer.tokenize(mess.lower()):
 				w = Word.query.get(word)
 				if w is None:
 					w = Word(id = word, neg = 1, cnt = 1)
