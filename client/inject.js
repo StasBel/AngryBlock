@@ -1,36 +1,38 @@
-//arrays calc
+function prepare(next){
+	//arrays calc
+    
+	elementsList = document.querySelectorAll("div[class^='news_item']")
 
-elementsList = document.querySelectorAll("div[class^='news_item']")
+	function getTitleText(id){
+		var element = elementsList[id].getElementsByClassName("colm_preview_post")[0].getElementsByClassName("title")[0].getElementsByTagName("a")[0]
+		return element.innerHTML
+	}
 
-function getTitleText(id){
-	var element = elementsList[id].getElementsByClassName("colm_preview_post")[0].getElementsByClassName("title")[0].getElementsByTagName("a")[0]
-	return element.innerHTML
+	titlesList = new Array()
+	for (var i = 0; i < elementsList.length; i++) {
+		titlesList[i] = getTitleText(i);
+	};
+
+	estimatesList = getEstimates(titlesList, next)
+
+	//clearing spaces
+
+	clearElements = document.getElementsByClassName("clear")
+
+	for (var i = clearElements.length - 2; i >= 0; i--) {
+		clearElements[i].remove()
+	}
+
+	//clearing adds
+
+	addsElements = document.getElementsByClassName("group")[0].querySelectorAll("div[class^='mgs']")
+
+	for (var i = addsElements.length - 1; i >= 0; i--) {
+		addsElements[i].remove()
+	}
+
+	document.getElementsByClassName("group")[0].getElementsByTagName("style")[0].remove()
 }
-
-titlesList = new Array()
-for (var i = 0; i < elementsList.length; i++) {
-	titlesList[i] = getTitleText(i);
-};
-
-estimatesList = getEstimates(titlesList)
-
-//clearing spaces
-
-clearElements = document.getElementsByClassName("clear")
-
-for (var i = clearElements.length - 2; i >= 0; i--) {
-	clearElements[i].remove()
-}
-
-//clearing adds
-
-addsElements = document.getElementsByClassName("group")[0].querySelectorAll("div[class^='mgs']")
-
-for (var i = addsElements.length - 1; i >= 0; i--) {
-	addsElements[i].remove()
-}
-
-document.getElementsByClassName("group")[0].getElementsByTagName("style")[0].remove()
 
 //useful funcs
 
@@ -47,7 +49,7 @@ function badButton(id){
 }
 
 function isGood(estimate){
-	if (estimate >= 50){
+	if (estimate == 1){
 		return true;
 	}else {
 		return false;
@@ -95,7 +97,6 @@ function addNews(id, type, transparencyLevel, isNeedToAddButtons){
 	if (isNeedToAddButtons){
 		addButtons(id)
 	}
-	//addButtons(id)
 	updateHTMLStructure(id)
 	if (type == "good"){
 		changeBackgroundColor(id, "green", transparencyLevel)
@@ -146,7 +147,7 @@ function addingButtonsAndBlock(){
 	})
 }
 
-addingButtonsAndBlock()
+prepare(addingButtonsAndBlock)
 
 //response event
 

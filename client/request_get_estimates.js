@@ -1,4 +1,4 @@
-function getEstimates(titles){
+function getEstimates(titles, callback){
 	var xhr = new XMLHttpRequest()
 
 	var json = JSON.stringify({
@@ -16,6 +16,7 @@ function getEstimates(titles){
         	for (var i = 0; i < ansArr.estimates.length; i++) {
         		est[i] = ansArr.estimates[i].rate
         	};
+        	callback()
 		}
 	}
 
