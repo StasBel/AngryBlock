@@ -2,35 +2,32 @@ if (window.location.href == 'http://lenta.ru/')
 {
 
 //////////////////////////////////////////////////FirstTable    
-	var all = document.querySelector("section.b-layout.b-layout_main");
+	var all = document.querySelector("section.b-layout.b-layout_main");   //Getting news from page
 	var firstTable = all.querySelector("div.first-item");
     var header = firstTable.querySelector("h2");
     var text = header.querySelector("a");
-    var isAns = 0;
 
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://stormy-ravine-9552.herokuapp.com/ask", false);
+    xhr.open("POST", "https://stormy-ravine-9552.herokuapp.com/ask", false);   //Create request to server
     xhr.setRequestHeader("Content-Type", "text/plain");
     xhr.onreadystatechange = function()
     {
-    	console.log(xhr.status);	
-    	if (xhr.readyState == 4 && xhr.status == 200)
-    	{
-    		isAns = 1;	
+    	if (xhr.readyState == 4 && xhr.status == 200)   //Check request status
+    	{	
     		var answer = JSON.parse(xhr.responseText);
     		for (var i = 0; i < answer.estimates.length; i++)
     			if (answer.estimates[i].rate != 1)
-    				firstTable.parentNode.removeChild(firstTable)
+    				firstTable.parentNode.removeChild(firstTable)   //Lock bad news
     	}	
     }
-    xhr.send(JSON.stringify({messages: [text.innerHTML]}));         
+    xhr.send(JSON.stringify({messages: [text.innerHTML]}));   //Send news text to server         
     
 
 ///////////////////////////////////////////////////SecondTable
 	var headers = all.querySelector("div.items");
 	var news = headers.querySelectorAll("a")
+    
     var messages = [];
-
     for (var i = 0; i < news.length; i++)
     	messages[i] = news[i].innerHTML;
 
@@ -39,7 +36,6 @@ if (window.location.href == 'http://lenta.ru/')
     xhr.setRequestHeader("Content-Type", "text/plain");
     xhr.onreadystatechange = function()
     {
-    	console.log(xhr.status);	
     	if (xhr.readyState == 4 && xhr.status == 200)
     	{			
     		var answer = JSON.parse(xhr.responseText);
@@ -61,7 +57,6 @@ if (window.location.href == 'http://lenta.ru/')
     xhr.setRequestHeader("Content-Type", "text/plain");
     xhr.onreadystatechange = function()
     {
-    	console.log(xhr.status);	
     	if (xhr.readyState == 4 && xhr.status == 200)
     	{			
     		var answer = JSON.parse(xhr.responseText);
@@ -88,7 +83,6 @@ if (window.location.href == 'http://lenta.ru/')
     xhr.setRequestHeader("Content-Type", "text/plain");
     xhr.onreadystatechange = function()
     {
-    	console.log(xhr.status);	
     	if (xhr.readyState == 4 && xhr.status == 200)
     	{			
     		var answer = JSON.parse(xhr.responseText);
@@ -113,7 +107,6 @@ if (window.location.href == 'http://lenta.ru/')
     xhr.setRequestHeader("Content-Type", "text/plain");
     xhr.onreadystatechange = function()
     {
-    	console.log(xhr.status);	
     	if (xhr.readyState == 4 && xhr.status == 200)
     	{			
     		var answer = JSON.parse(xhr.responseText);
@@ -138,7 +131,6 @@ if (window.location.href == 'http://lenta.ru/')
     xhr.setRequestHeader("Content-Type", "text/plain");
     xhr.onreadystatechange = function()
     {
-    	console.log(xhr.status);	
     	if (xhr.readyState == 4 && xhr.status == 200)
     	{			
     		var answer = JSON.parse(xhr.responseText);
@@ -163,7 +155,6 @@ if (window.location.href == 'http://lenta.ru/')
     xhr.setRequestHeader("Content-Type", "text/plain");
     xhr.onreadystatechange = function()
     {
-    	console.log(xhr.status);	
     	if (xhr.readyState == 4 && xhr.status == 200)
     	{			
     		var answer = JSON.parse(xhr.responseText);
@@ -194,7 +185,6 @@ if (window.location.href == 'http://lenta.ru/')
     xhr.setRequestHeader("Content-Type", "text/plain");
     xhr.onreadystatechange = function()
     {
-    	console.log(xhr.status);	
     	if (xhr.readyState == 4 && xhr.status == 200)
     	{			
     		var answer = JSON.parse(xhr.responseText);
@@ -206,14 +196,14 @@ if (window.location.href == 'http://lenta.ru/')
     xhr.send(JSON.stringify({messages: messages}));
 
 
-	var news = [];
-	var headers = eigthTable.querySelectorAll("h3");
+	
+	headers = eigthTable.querySelectorAll("h3");
+	news = [];
 	var tmp = 0;
-	
-	
 	for (var i = 0; i < headers.length; i++)
 	    if (!headers[i].querySelector("span"))
 			news[tmp++] = headers[i].querySelector("a");
+
 	messages = [];
 	for (var i = 0; i < news.length; i++)
 		messages[i] = news[i].innerHTML;
@@ -223,7 +213,6 @@ if (window.location.href == 'http://lenta.ru/')
     xhr.setRequestHeader("Content-Type", "text/plain");
     xhr.onreadystatechange = function()
     {
-    	console.log(xhr.status);	
     	if (xhr.readyState == 4 && xhr.status == 200)
     	{			
     		var answer = JSON.parse(xhr.responseText);
@@ -238,6 +227,7 @@ if (window.location.href == 'http://lenta.ru/')
 /////////////////////////////////////////////////////////NinethTable
 	var ninethTable = document.querySelector("section.b-tabloid");
 	headers = ninethTable.querySelectorAll("div.b-tabloid__topic");
+	
 	for (var i = 0; i < headers.length; i++)
 		if (headers[i].querySelectorAll("a").length == 1)
 			news[i] = headers[i].querySelector("a");
@@ -253,7 +243,6 @@ if (window.location.href == 'http://lenta.ru/')
     xhr.setRequestHeader("Content-Type", "text/plain");
     xhr.onreadystatechange = function()
     {
-    	console.log(xhr.status);	
     	if (xhr.readyState == 4 && xhr.status == 200)
     	{			
     		var answer = JSON.parse(xhr.responseText);
