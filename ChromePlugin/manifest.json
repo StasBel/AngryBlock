@@ -1,0 +1,38 @@
+{
+	"manifest_version": 2,		
+	"name": "AngryBlock",
+	"version": "1.1",
+	"icons": {
+		"16": "16.png",
+		"32": "32.png",
+		"48": "48.png",
+		"128": "128.png"
+	},
+
+	"background": {
+	    "page": "background.html"  
+  	},
+
+	"permissions": [
+		"https://stormy-ravine-9552.herokuapp.com/ask*",
+		"tabs",
+		"activeTab",
+		"http://www.gazeta.spb.ru/",
+		"http://192.168.210.5:33507/"
+	],
+
+	"browser_action": {
+		"default_icon" : "48.png",
+		"default_popup": "popup.html"
+	},
+
+	"content_scripts": [ {
+		"js" : ["getNewsGazeta.js", "selection.js", "getNewsLenta.js"],
+		"matches" : ["http://www.gazeta.spb.ru/allnews/", "http://lenta.ru/"]
+		}
+	] 
+
+		
+}	
+		
+
